@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Carreer extends Model
 {
     use HasFactory;
-    protected $table = 'careers';
+    protected $table = 'carreers';
     protected $dateFormat = 'Y-m-d H:i:s';
     protected $fillable = [
         'name', 

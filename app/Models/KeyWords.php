@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class KeyWords extends Model
 {
     use HasFactory;
-    protected $table = 'keywords';
+    protected $table = 'key_words';
     protected $dateFormat = 'Y-m-d H:i:s';
     protected $fillable = [
         'name',

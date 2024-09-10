@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Carreer;
 use Illuminate\Support\Str;
 
-class CareerFactory extends Factory
+class CarreerFactory extends Factory
 {
     protected $model = Carreer::class;
     public function definition(): array

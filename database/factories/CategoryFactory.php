@@ -11,7 +11,7 @@ class CategoryFactory extends Factory
     protected $model = Category::class;
     public function definition(): array
     {
-        $name = $this->faker->word(20);
+        $name = $this->faker->unique()->word(20);
         return [
             'name' => $name,
             'slug' => Str::slug($name)
