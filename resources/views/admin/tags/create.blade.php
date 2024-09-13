@@ -7,7 +7,49 @@
 @stop
 
 @section('content')
-    <p>Welcome to this beautiful admin panel.</p>
+    @if (session('info'))
+        <div class="alert alert-success">
+            {{ session('info') }}
+        </div>
+    @endif
+
+    <div class="card">
+        <div class="card-body">
+            {!! html()->form('POST', route('admin.tags.store'))->open() !!}
+            <div class="form-group">
+                {!! html()->label('Nombre', 'name') !!}
+                {!! html()->text('name')->id('name')->class('form-control')->placeholder('Ingrese el nombre de la etiqueta') !!}
+
+                @error('name')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                {!! html()->label('Slug', 'slug') !!}
+                {!! html()->text('slug')->id('slug')->class('form-control')->placeholder('Ingrese el nombre de la etiqueta')->isReadonly() !!}
+
+                @error('slug')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                {!! html()->label('Color', 'color') !!}
+                {!! html()->input('color', 'color')->id('color_hex')->class('form-control')->value('#000000') !!}
+
+                @error('color')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                {!! html()->submit('Guardar')->class('btn btn-primary') !!}
+            </div>
+            {!! html()->form()->close() !!}
+
+        </div>
+    </div>
 @stop
 
 @section('css')
@@ -15,5 +57,19 @@
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+    <script src="{{asset('vendor/jQuery-Plugin-stringToSlug-1.3/jquery.stringToSlug.min.js')}}"></script>
+
+    <script>
+        $(document).ready(function(){
+            $("#name").stringToSlug({
+                setEvents: 'keyup keydown blur',
+                getPut: '#slug',
+                space: '-'
+            });
+
+        //     $('#color_hex').on('input', function() {
+        //         $('#color').val($(this).val());
+        //     });
+        });
+    </script>
 @stop

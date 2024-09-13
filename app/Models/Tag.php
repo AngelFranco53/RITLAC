@@ -13,8 +13,13 @@ class Tag extends Model
     protected $dateFormat = 'Y-m-d H:i:s';
     protected $fillable = [
         'name',
-        'slug'
+        'slug',
+        'color'
     ];
+
+    public function getRouteKeyName() : string {
+        return 'slug';
+    }
 
     public function posts() : BelongsToMany {
         return $this->belongsToMany(Post::class);
