@@ -15,21 +15,24 @@ return new class extends Migration
             $table->string('slug');
             $table->text('abstract')->nullable();
             $table->text('sumary')->nullable();
-            $table->text('extract');
-            $table->longText('body');
-            $table->enum('status', [1, 2, 3, 4, 5])->default(1);
-            $table->string('file');
-
-
+            $table->text('extract')->nullable();
+            $table->longText('body')->nullable();
+            $table->string('file')->nullable();
+            $table->enum('status', [1,2,3,4,5])->default(1);
+            
+            $table->unsignedBigInteger('status_id')->nullable();
             $table->unsignedBigInteger('reviwer_id')->nullable();
             $table->unsignedBigInteger('publisher_id')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('carreer_id');
+            $table->unsignedBigInteger('type_id')->nullable();
 
+            $table->foreign('status_id')->references('id')->on('status')->onDelete('cascade');
             $table->foreign('reviwer_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('publisher_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('carreer_id')->references('id')->on('carreers')->onDelete('cascade');
+            $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade');
 
             $table->timestamps();
         });

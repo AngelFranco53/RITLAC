@@ -13,19 +13,10 @@ class Post extends Model
     use HasFactory;
     protected $table = 'posts';
     protected $dateFormat = 'Y-m-d H:i:s';
-    protected $fillable = [
-        'name',
-        'slug',
-        'abstract',
-        'summary',
-        'extract',
-        'body',
-        'status',
-        'file',
-        'reviwer_id',
-        'publisher_id',
-        'category_id',
-        'carreer_id',
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at',
     ];
 
     public function reviwer() : BelongsTo {
@@ -58,5 +49,13 @@ class Post extends Model
 
     public function image() : MorphOne {
         return $this->morphOne(Image::class, 'imageable');
+    }
+
+    public function status() : BelongsTo {
+        return $this->belongsTo(Status::class);
+    }
+
+    public function type() : BelongsTo {
+        return $this->belongsTo(Type::class);
     }
 }
